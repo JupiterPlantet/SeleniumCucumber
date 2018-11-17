@@ -7,10 +7,7 @@
 	</listeners>
 	<test name="Test - 1">
 		<classes>
-			<class name="com.cucumber.framework.runner.SearchFeatureRunner" />
-			<class name="com.cucumber.framework.runner.LaptopFeatureRunner" />
-			<class name="com.cucumber.framework.runner.TabletFeatureRunner" />
-			<class name="com.cucumber.framework.runner.SearchWithFilterRunner" />
+			<class name="com.cucumber.framework.runner.CategoryFeatureRunner" />
 		</classes>
 	</test>
 </suite> 

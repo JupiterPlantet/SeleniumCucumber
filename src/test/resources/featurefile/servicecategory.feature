@@ -2,14 +2,14 @@ Feature: Verify that admin can add,edit ,activate and deactivate service from th
 
 
   Scenario Outline: Admin should be able to add service category with all mandatory field successfully
-    Given I am on service category page
+    Given Admin logs into the panel with valid credentials
+    Then the login should be successful
+    Given I navigate to service category page
     When  I click on Add service category
     Then  I can see create category page
+#    When I generate random number
     When  I enter category name with "<Category Name>" and category description with"<Category Description>"
-    And   I choose category image by clicking choose file
-    And   I choose category cover image by clicking choose file
-    And   I enter category video link and click on submit button
-    Then  I can see added service in list  of category
+    Then  I can see added service in list of category
 
     Examples:
       |Category Name|Category Description|

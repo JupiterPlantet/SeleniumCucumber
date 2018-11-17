@@ -8,6 +8,7 @@ package com.cucumber.framework.configuration.browser;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,13 +37,9 @@ public class ChromeBrowser {
 	}
 
 	public WebDriver getChromeDriver(Capabilities cap) {
-		System.setProperty("webdriver.chrome.driver",
-				ResourceHelper.getResourcePath("driver/chromedriver.exe"));
-		System.setProperty("webdriver.chrome.logfile",
-				ResourceHelper.getResourcePath("logs/chromelogs/")
-						+ "chromelog" + DateTimeHelper.getCurrentDateTime()
-						+ ".log");
-		return new ChromeDriver(cap);
+
+        WebDriverManager.chromedriver().setup();
+		return new ChromeDriver();
 	}
 	
 	public WebDriver getChromeDriver(String hubUrl,Capabilities cap) throws MalformedURLException {

@@ -5,6 +5,7 @@
  */
 package com.cucumber.framework.helper.PageObject;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -107,6 +108,15 @@ public abstract class PageBase{
 		if(title == null || title.isEmpty())
 			throw new IllegalArgumentException(title);
 		return driver.getTitle().trim().contains(title);
+	}
+
+	public boolean isLoggedIn() {
+		return driver.findElement(By.className("img-circle")).isDisplayed();
+	}
+
+	public int getRandomNumber(){
+		Random r = new Random();
+		return r.nextInt();
 	}
 	
 }

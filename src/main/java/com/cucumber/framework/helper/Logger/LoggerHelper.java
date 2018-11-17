@@ -27,7 +27,7 @@ public class LoggerHelper {
 			return Logger.getLogger(clas);
 		
 		PropertyConfigurator.configure(ResourceHelper
-				.getResourcePath("configfile/log4j.properties"));
+				.getResourcePath("../../src/main/resources/configfile/log4j.properties"));
 		root = true;
 		return Logger.getLogger(clas);
 	}

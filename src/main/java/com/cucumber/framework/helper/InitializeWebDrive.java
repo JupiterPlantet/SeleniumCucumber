@@ -55,15 +55,15 @@ public class InitializeWebDrive {
 				return firefox.getFirefoxDriver(firefox
 						.getFirefoxCapabilities());
 
-			case HtmlUnitDriver:
-				HtmlUnitBrowser htmlUnit = HtmlUnitBrowser.class.newInstance();
-				return htmlUnit.getHtmlUnitDriver(htmlUnit
-						.getHtmlUnitDriverCapabilities());
+//			case HtmlUnitDriver:
+//				HtmlUnitBrowser htmlUnit = HtmlUnitBrowser.class.newInstance();
+//				return htmlUnit.getHtmlUnitDriver(htmlUnit
+//						.getHtmlUnitDriverCapabilities());
 
-			case Iexplorer:
-				IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
-				return iExplore.getIExplorerDriver(iExplore
-						.getIExplorerCapabilities());
+//			case Iexplorer:
+//				IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
+//				return iExplore.getIExplorerDriver(iExplore
+//						.getIExplorerCapabilities());
 
 			case PhantomJs:
 				PhantomJsBrowser jsBrowser = PhantomJsBrowser.class
@@ -163,7 +163,6 @@ public class InitializeWebDrive {
 		
 		try {
 			if (ObjectRepo.driver != null) {
-				
 				if(scenario.isFailed())
 					scenario.write(new GenericHelper(ObjectRepo.driver).takeScreenShot(scenario.getName()));
 				
