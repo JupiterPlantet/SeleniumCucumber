@@ -1,75 +1,79 @@
 Feature: Verify user can add and edit Events
 
 
-  Scenario Outline: Admin should be able to add Events with mandatory fields successfully
+   Scenario Outline: Admin should be able to add Events with mandatory fields successfully
+     Given Admin logs into the panel with valid credentials
+     Then the login should be successful
+     Given I navigate to Vendor List page
+     When I click Add Event
+     Then I should see List of Events page
+     When I enter Event Name with "<Event Name>" and Event Description with "<Event Description>" and Event Category with "<Event Category>" and Event Address with "<Event Address1>" and City with "<City>" and enter Latitude with "<Latitude>" and Longitude with "<Longitude>" and Terms&Conditions with "<Terms&Conditions>"
+     Then the Event should be submitted successfully and the submitted Event "<Event Name>" should be shown in List of Event page
+     Examples:
+      | Vendor Name | Event Name | Event Description |  Event Category | Event Address1              | City        | Latitude | Longitude | Terms&Conditions |
+      | a_shailaja1 | Birthday   | for kids          |    celebration  | 120, Rancliffe road, E6 3hn | London      |56.2322   | 60.33344  |         apply    |
 
-    Given I am in "Vendor List" page
-    When I add event for a vendor with name "<Vendor Name>"
-    When I select to "Add Event"
-    Then I should see "Create Event" page
-    When I enter Event Name with "<Event Name>" and Event Description with "<Event Description>" and Event Start Date with"<Event Start Date>"
-#    When I enter Event End Date with "<Event End Date>" and Event Start Time with "<Event Start Time>" and Event End Time with "<Event End Time>"
-#    When I enter Event Category with "<Event Category>" and Event Address1 with "<Event Address1>" and City with "<City>"
-#    When I enter Latitude with "<Latitude>" and Longitude with "<Longitude>" and Terms&Conditions with "<Terms&Conditions>" and image with "Choose File"
-    When I enter the data to create event
-      | Event Name        | <Event Name>        |
-      | Event Description | <Event Description> |
-      |                   |                     |
 
-    Then the Event should be submitted successfully
-    And the submitted Event with "<Event Name>" should be shown in list of discount page
+   Scenario Outline: Admin should not be able to add Events without mandatory fields
 
-    Examples:
-      | Vendor Name | Event Name | Event Description | Event Start Date | Event End Date | Event Start Time | Event End Time | Event Category | Event Address1 | City | Latitude | Longitude | Terms&Conditions |
-      | a_shailaja  |            |                   |                  |                |                  |                |                |                |      |          |           |                  |
+     Given Admin logs into the panel with valid credentials
+     Then the login should be successful
+     Given I am in Vendor List page
+     When I search for a vendor with name "<Vendor Name>" and click on Add Event
+     Then I should see Events List page
+     When I select to Add Event
+     When I enter Event Address with "<Event Address2>" and State/Country with "<State/Country>"
+     Then I should see a validation massage "<Error Message>"
 
-  Scenario Outline: Admin should not be able to add Events with out mandatory fields
-
-    Given I am in "Vendor List" page
-    When I add Event for a vendor with name "<Vendor Name>"
-    When I select to "Add Event"
-    Then I should see "Create Event" page
-    When I enter Event Address2 with "<Event Address2>" and State/Country with "<State/Country>"
-    Then I should see a validation massage "<Error Message>"
-
-    Examples:
+     Examples:
       | Vendor Name | Event Address2 | State/Country | Error message            |
-      | a_shailaja  |                |               | This is a required field |
+      | a_shailaja1 |     Bedford    | Bedfordshire       | This is a required field |
+
+
+  Scenario Outline: Admin should be able to Inactive Events Status
+
+      Given Admin logs into the panel with valid credentials
+      Then the login should be successful
+      Given I am in List of Event page
+      When I search for Event Name with "<Event Name>"
+      Then I should see searched Event
+      When I select Inactive
+      Then the status should be changed successfully
+
+    Examples:
+        |   Event Name         |
+        |   Birthday-1297161447  |
+
+  Scenario Outline: User should be able to Activate Status of Event
+
+    Given Admin logs into the panel with valid credentials
+    Then the login should be successful
+    Given I am on List of Event page
+    When I search Event Name with "<Event Name>"
+    Then I should see searched Event name
+    When I select Active
+    Then the status should change successfully
+
+    Examples:
+      | Event Name                    |
+      |   Birthday-1297161447         |
 
 
   Scenario Outline: Admin should be able to edit Events with mandatory fields successfully
 
-    Given I am in "Vendor List" page
-    When I add Event for a vendor with name "<Vendor Name>"
-    When I select to "Add Event"
-    Then I should see "Create Event" page
-    When I enter Event Name with "<Event Name>" and Event Description with "<Event Description>" and Event Start Date with"<Event Start Date>"
-    When I enter Event End Date with "<Event End Date>" and Event Start Time with "<Event Start Time>" and Event End Time with "<Event End Time>"
-    When I enter Event Category with "<Event Category>" and Event Address1 with "<Event Address1>" and City with "<City>"
-    When I enter Latitude with "<Latitude>" and Longitude with "<Longitude>" and Terms&Conditions with "<Terms&Conditions>" and image with "Choose File"
-    Then the Event should be submitted successfully
-    And the submitted Event with "<Event Name>" should be shown in list of Event page
-    When I edit the Event "<Event>"
-    When I enter Event Start time with "<Edited Start Event Time>" and Event End Time with "<Edited Event End Time>"
+    Given Admin logs into the panel with valid credentials
+    Then the login should be successful
+    Given I am on Events List page
+    When I search for an Event Name with "<Event Name>" and click on Edit
+    Then I should see Edit Event page
+    When I edit Event Start Time with "<Edited Event Start Date>" and Event Start Time with "<Edited Start Event Time>" and Event End Time with "<Edited Event End Time>" and Submit
+    Then I should be able to see edited event
 
-    Examples:
-      | Vendor Name | Event Name | Event Description | Event Start Date | Event End Date | Event Start Time | Event End Time | Event Category | Event Address1 | City | Latitude | Longitude | Terms&Conditions | Edited Start Event Time | Edited Event End Time |
-      | a_shailaja  |            |                   |                  |                |                  |                |                |                |      |          |           |                  |                         |                       |
+     Examples:
+       | Vendor Name | Event Name      | Edited Event Start Date             | Edited Start Event Time       | Edited Event End Time |
+       | a_shailaja1  |    Birthday Event|    12/18/2018                     |      1300                    |      2300                 |
 
 
-  Scenario Outline: Admin should be able to Inactive and Activate Events Status
-
-    Given I am in "Vendor List" page
-    When I select to "Add Event" with name  "<Event>"
-    When I Inactive the Event with "<Event>"
-    Then the Status of the Event should be changed as Inactive
-    And Edit option should not be visible successfully
-    When I Active the event with "<Event>"
-    Then the Status of Event should be changed as Active and Edit option should be visible successfully
-
-    Examples:
-      | Vendor Name | Event Name | Event Description | Event Start Date | Event End Date | Event Start Time | Event End Time | Event Category | Event Address1 | City | Latitude | Longitude | Terms&Conditions | Dialog                                     |
-      | a_shailaja  |            |                   |                  |                |                  |                |                |                |      |          |           |                  | Do you want to change the status of Event? |
 
 
 #  Scenario Outline: Admin should be able search Events in Search bar
