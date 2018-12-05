@@ -8,6 +8,7 @@
 	<test name="Test - 1">
 		<classes>
 			<class name="com.cucumber.framework.runner.CategoryFeatureRunner" />
+			<class name="com.cucumber.framework.runner.EventRunner" />
 		</classes>
 	</test>
 </suite> 

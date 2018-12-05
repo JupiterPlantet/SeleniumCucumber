@@ -24,4 +24,11 @@ public class DashboardPage extends PageBase {
 	public void gotoServiceCategoryPage(){
 		driver.get("http://mca.bananaappscenter.com/User/SerCategoriesList");
 	}
+	public void gotoVendorListPage(){
+		driver.get("http://mca.bananaappscenter.com/User/VendorList");
+	}
+	public void gotoCreateEventPage(){
+	    driver.get("http://mca.bananaappscenter.com/User/AddEvent?VenID=10066");
+    }
+    public void gotoEventListPage(){driver.get("http://mca.bananaappscenter.com/User/EventsList/10066");}
 }
